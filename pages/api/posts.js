@@ -68,8 +68,7 @@ export default async function handler(req, res) {
 
             // Validation complete
             // INSERT post to db
-            const postQuery = `INSERT INTO posts (fk_user_id, post_text)
-                                VALUES(?,?)`;
+            const postQuery = `CALL INSERT_post(?,?)`;
             const [post] = await dbConn.execute(postQuery, [userId, postText]);
 
             // dbConn error

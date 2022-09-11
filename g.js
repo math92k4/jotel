@@ -19,6 +19,17 @@ export function IsValidSerial(serial) {
     return false;
 }
 
+export function CleanString(str) {
+    if (!str) return false;
+    const noDblSpaces = str.replace(/\s+/g, ' ').trim();
+    const noLineBreaks = noDblSpaces.replace(/[\r\n]/gm, '').trim();
+    return noLineBreaks;
+}
+export function IsValidText(text) {
+    if (text.length <= 150 && text.length >= 2) return true;
+    return false;
+}
+
 // Options
 export const CookieOptions = {
     httpOnly: true,

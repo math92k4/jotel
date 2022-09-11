@@ -4,7 +4,7 @@ import { IsValidName, IsValidPassword, dbConfig } from '../../g';
 
 export default async function handler(req, res) {
     // Validate method
-    if (!req.method == 'POST') {
+    if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Only POST permitted' });
     }
 

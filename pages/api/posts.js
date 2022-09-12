@@ -61,8 +61,8 @@ export default async function handler(req, res) {
         const sessionId = decoded.sid;
 
         // VALIDATE SESSION IN DB
+        const dbConn = await mysql.createConnection(dbConfig);
         try {
-            const dbConn = await mysql.createConnection(dbConfig);
             const selQuery = `SELECT * FROM sessions 
                             WHERE session_id = ? AND fk_user_id = ? 
                             LIMIT 1`;
@@ -121,8 +121,8 @@ export default async function handler(req, res) {
         const sessionId = decoded.sid;
 
         // VALIDATE SESSION IN DB
+        const dbConn = await mysql.createConnection(dbConfig);
         try {
-            const dbConn = await mysql.createConnection(dbConfig);
             const selQuery = `SELECT * FROM sessions 
                             WHERE session_id = ? AND fk_user_id = ? 
                             LIMIT 1`;

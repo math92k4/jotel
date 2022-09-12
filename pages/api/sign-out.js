@@ -11,8 +11,8 @@ export default async function handler(req, res) {
     const userId = req.body.user_id;
 
     // DELETE session
+    const dbConn = await mysql.createConnection(dbConfig);
     try {
-        const dbConn = await mysql.createConnection(dbConfig);
         const query = `DELETE FROM sessions WHERE session_id = ? AND fk_user_id = ?`;
         const values = [sessionId, userId];
         const [result] = await dbConn.execute(query, values);

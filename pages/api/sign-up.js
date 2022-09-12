@@ -22,9 +22,9 @@ export default async function handler(req, res) {
     // Hash password
     const hashed = await hash(userPassword, 10);
 
+    // Connect and insert to db
+    const dbConn = await mysql.createConnection(dbConfig);
     try {
-        // Connect and insert to db
-        const dbConn = await mysql.createConnection(dbConfig);
         const query = `CALL INSERT_user(?, ?)`;
         const values = [userName, hashed];
         const [data] = await dbConn.execute(query, values);

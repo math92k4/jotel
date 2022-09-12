@@ -22,9 +22,9 @@ export default async function handler(req, res) {
         return res.status(400).json({ errorKey: 'user_password', message: 'Invalid password ' });
     }
 
+    // Connect and insert to db
+    const dbConn = await mysql.createConnection(dbConfig);
     try {
-        // Connect and insert to db
-        const dbConn = await mysql.createConnection(dbConfig);
         const query = `SELECT user_id, user_password FROM users
                         WHERE user_name = ? LIMIT 1`;
         const values = [userName];

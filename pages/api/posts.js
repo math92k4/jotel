@@ -20,11 +20,13 @@ export default async function handler(req, res) {
         // Connect do DB and get posts in chunks of 15
         try {
             const dbConn = await mysql.createConnection(dbConfig);
-            const query = 'SELECT * FROM posts LIMIT 15 OFFSET +';
+            const query = 'SELECT * FROM posts LIMIT 15 OFFSET ?';
             const [data] = await dbConn.execute(query, [offSet]);
             return res.status(200).json(data);
         } catch (error) {
             return res.status(500).json({ error: error.message });
+        } finally {
+            dbConn.destroy();
         }
 
         //
@@ -83,6 +85,8 @@ export default async function handler(req, res) {
         } catch (err) {
             console.log(err.message);
             return res.status(500).json({ message: 'Server eroor' });
+        } finally {
+            dbConn.destroy();
         }
 
         //
@@ -138,6 +142,8 @@ export default async function handler(req, res) {
         } catch (err) {
             console.log(err.message);
             return res.status(500).json({ message: 'Server error' });
+        } finally {
+            dbConn.destroy();
         }
 
         //

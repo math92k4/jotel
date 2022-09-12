@@ -41,18 +41,9 @@ export const CookieOptions = {
 
 // DBCONF
 export const dbConfig = {
-    host: 'sql11.freemysqlhosting.net',
-    database: 'sql11519090',
-    port: 3306,
-    user: 'sql11519090',
-    password: 'GNs4YES2wL',
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
 };
-// export const dbConfig = {
-//     host: process.env.DB_HOST,
-//     database: process.env.DB_NAME,
-//     port: process.env.DB_PORT,
-//     user: process.env.DB_USER,
-//     password: process.env.DB_PASSWORD,
-// };
-
-// mysql --host=sql11.freemysqlhosting.net --port=3306 --user=sql11519090  --password=GNs4YES2wL sql11519090

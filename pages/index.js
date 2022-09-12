@@ -8,15 +8,15 @@ export default function Home({ data }) {
     const [moreToLoad, setMoreToLoad] = useState(data.length == 15 ? true : false);
 
     // Load more posts from server
-    // async function fetchPostChunk() {
-    //     const conn = await fetch(`/api/posts?ofs=${postOffset}`, {
-    //         method: 'GET',
-    //     });
-    //     const newOffset = await conn.json();
-    //     if (newOffset.length < 15) setMoreToLoad(false);
-    //     setPosts(posts.concat(newOffset));
-    //     setPostOffset(postOffset + 15);
-    // }
+    async function fetchPostChunk() {
+        const conn = await fetch(`/api/posts?ofs=${postOffset}`, {
+            method: 'GET',
+        });
+        const newOffset = await conn.json();
+        if (newOffset.length < 15) setMoreToLoad(false);
+        setPosts(posts.concat(newOffset));
+        setPostOffset(postOffset + 15);
+    }
 
     // DOM
     return (
@@ -25,7 +25,7 @@ export default function Home({ data }) {
                 {posts.map((post) => {
                     return <Post post={post} key={post.post_id} />;
                 })}
-                {/* {moreToLoad ? <button onClick={() => fetchPostChunk()}>MORE</button> : <p>This is the end...</p>} */}
+                {moreToLoad ? <button onClick={() => fetchPostChunk()}>MORE</button> : <p>This is the end...</p>}
             </section>
         </main>
     );
@@ -41,11 +41,11 @@ export async function getServerSideProps(context) {
         method: 'GET',
     });
     const data = await conn.json();
-    console.log(data);
+    // console.log(data);
 
-    try {
-        const decodedJwt = verify(cookie, process.env.JWT_SECRET);
-    } catch (err) {}
+    // try {
+    //     const decodedJwt = verify(cookie, process.env.JWT_SECRET);
+    // } catch (err) {}
 
     return {
         props: {

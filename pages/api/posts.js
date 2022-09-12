@@ -18,8 +18,9 @@ export default async function handler(req, res) {
         }
 
         // Connect do DB and get posts in chunks of 15
+        const dbConn = await mysql.createConnection(dbConfig);
+
         try {
-            const dbConn = await mysql.createConnection(dbConfig);
             const query = 'SELECT * FROM posts LIMIT 15 OFFSET ?';
             const [data] = await dbConn.execute(query, [offSet]);
             return res.status(200).json(data);

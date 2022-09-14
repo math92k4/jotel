@@ -42,9 +42,9 @@ export default function SignIn() {
                 </label>
                 <label>
                     Password
-                    <input type="text" name="user_password" id="user_password" />
+                    <input type="password" name="user_password" id="user_password" />
                 </label>
-                <button>Sign up</button>
+                <button>Sign in</button>
             </form>
         </main>
     );

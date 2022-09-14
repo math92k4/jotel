@@ -38,12 +38,10 @@ export default async function handler(req, res) {
     } catch (error) {
         // If userName already in db
         if (error.message.includes(userName)) {
-            res.status(409).json({ error: 'Username already registred' });
+            return res.status(409).json({ error: 'Username already registred' });
         }
         return res.status(500).json({ error: 'Server error' });
     } finally {
         dbConn.destroy();
     }
 }
-
-// const decoded = jwt.verify(token, "secret")

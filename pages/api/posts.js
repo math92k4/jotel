@@ -1,5 +1,5 @@
 import mysql from 'mysql2/promise';
-import { dbConfig, IsValidSerial, CleanString, IsValidName, IsValidText } from '../../g';
+import { dbConfig, IsValidSerial, CleanString, IsValidText } from '../../g';
 import { verify } from 'jsonwebtoken';
 
 export default async function handler(req, res) {
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
         const dbConn = await mysql.createConnection(dbConfig);
 
         try {
-            const query = 'SELECT * FROM posts LIMIT 15 OFFSET ?';
+            const query = 'SELECT * FROM `posts` ORDER BY post_iat DESC LIMIT 15 OFFSET ?';
             const [data] = await dbConn.execute(query, [offSet]);
             return res.status(200).json(data);
         } catch (error) {
@@ -59,6 +59,7 @@ export default async function handler(req, res) {
 
         const userId = decoded.uid;
         const sessionId = decoded.sid;
+        const postIAt = Math.round(Date.now() / 1000);
 
         // VALIDATE SESSION IN DB
         const dbConn = await mysql.createConnection(dbConfig);
@@ -75,9 +76,8 @@ export default async function handler(req, res) {
 
             // Validation complete
             // INSERT post to db
-            const postQuery = `CALL INSERT_post(?,?)`;
-            const [post] = await dbConn.execute(postQuery, [userId, postText]);
-            console.log(post);
+            const postQuery = `CALL INSERT_post(?,?,?)`;
+            const [[[post]]] = await dbConn.execute(postQuery, [userId, postText, postIAt]);
 
             // SUCCES
             return res.status(200).json({ post: post });

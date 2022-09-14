@@ -30,6 +30,15 @@ export function IsValidText(text) {
     return false;
 }
 
+export function epochToTime(iat) {
+    const now = Math.round(Date.now() / 1000);
+    const diff = now - iat;
+    if (diff >= 31536000) return Math.round(diff / 31536000) + 'y';
+    if (diff >= 86400) return Math.round(diff / 86400) + 'd';
+    if (diff >= 3600) return Math.round(diff / 3600) + 'h';
+    if (diff >= 60) return Math.round(diff / 60) + 'm';
+}
+
 // Options
 export const CookieOptions = {
     httpOnly: true,

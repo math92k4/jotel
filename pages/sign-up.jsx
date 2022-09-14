@@ -40,7 +40,7 @@ export default function SignUp() {
                 </label>
                 <label>
                     Username
-                    <input type="text" name="user_password" id="user_password" />
+                    <input type="password" name="user_password" id="user_password" />
                 </label>
                 <button>Sign up</button>
             </form>

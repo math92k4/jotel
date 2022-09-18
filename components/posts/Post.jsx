@@ -4,11 +4,12 @@ import Router from 'next/router';
 
 const Post = memo(({ post, userId }) => {
     const [likes, setLikes] = useState(post.post_likes);
-    const [isLiked, setIsLiked] = useState(false);
+    const [isLiked, setIsLiked] = useState(post.is_like);
+
 
     async function likePost(event) {
         const btn = event.target;
-        const postId = btn.parentElement.parentElement.dataset.post_id;
+        const postId = btn.parentElement.dataset.post_id;
         let likeType = false;
         if (btn.dataset.like) likeType = true;
 
@@ -29,21 +30,28 @@ const Post = memo(({ post, userId }) => {
 
         if (likeType) setLikes(likes + 1);
         else setLikes(likes - 1);
-        setIsLiked(true);
+        setIsLiked(likeType ? 1 : 0);
     }
 
     return (
-        <article data-post_id={post.post_id}>
-            <div onClick={() => Router.push('/post/' + post.post_id)}>
-                <p className="time">{epochToTime(post.post_iat)}</p>
-                <p className="post_text">{post.post_text}</p>
+        <article className='post'>
+            <div className='top_bar'>
+                <p className='time'>{epochToTime(post.post_iat)} <span></span></p>
             </div>
-            <div className={`likes ${isLiked || userId ? 'disabled' : ''}`}>
-                <button data-like="true" onClick={!isLiked && userId ? likePost : undefined}>
-                    +
-                </button>
-                <p>{likes}</p>
-                <button onClick={!isLiked && userId ? likePost : undefined}>-</button>
+            <div className='flexer'>
+                <div className='stretcher' onClick={() => Router.push('/post/' + post.post_id)}>
+                    <p className="post_text" >{post.post_text}</p>
+                    <div className='bottom_bar'>
+                        <p className='comments'>{post.post_comments}</p>
+                    </div>
+                </div>
+                <div data-post_id={post.post_id} className={`likes ${isLiked == 1 || isLiked == 0 || !userId ? 'disabled' : ''}`}>
+                    <button className={`up ${isLiked == 0 ? 'hollow' : ''}`} data-like="true" onClick={!isLiked && userId ? likePost : undefined}>
+                    &#8963;
+                    </button>
+                    <p>{likes}</p>
+                    <button className={`down ${isLiked == 1 ? 'hollow' : ''}`} onClick={!isLiked && userId ? likePost : undefined}>&#8963;</button>
+                </div>
             </div>
         </article>
     );

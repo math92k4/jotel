@@ -34,9 +34,10 @@ export function epochToTime(iat) {
     const now = Math.round(Date.now() / 1000);
     const diff = now - iat;
     if (diff >= 31536000) return Math.round(diff / 31536000) + 'y';
-    if (diff >= 86400) return Math.round(diff / 86400) + 'd';
-    if (diff >= 3600) return Math.round(diff / 3600) + 'h';
-    if (diff >= 60) return Math.round(diff / 60) + 'm';
+    else if (diff >= 86400) return Math.round(diff / 86400) + 'd';
+    else if (diff >= 3600) return Math.round(diff / 3600) + 'h';
+    else if (diff >= 60) return Math.round(diff / 60) + 'm';
+    else return diff + 's';
 }
 
 // Options

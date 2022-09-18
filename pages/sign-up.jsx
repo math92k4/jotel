@@ -33,7 +33,7 @@ export default function SignUp() {
     // DOM
     return (
         <main>
-            <form onSubmit={handleSubmit}>
+            <form className='sign_form' onSubmit={handleSubmit}>
                 <label>
                     Username
                     <input type="text" name="user_name" id="user_name" />

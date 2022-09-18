@@ -1,9 +1,12 @@
 import Post from './Post.jsx';
 import { useEffect, useState } from 'react';
+import {PostModal} from "./PostModal"
 
-export default function PostContainer({ posts, setPosts, userId }) {
+export default function PostContainer({ userId, initPosts }) {
+    const [posts, setPosts] = useState(initPosts);
     const [postOffset, setPostOffset] = useState(15);
     const [moreToLoad, setMoreToLoad] = useState(posts.length == 15 ? true : false);
+
 
     // FETCH chunk of posts using offset
     async function fetchPostChunk() {
@@ -26,7 +29,8 @@ export default function PostContainer({ posts, setPosts, userId }) {
             {posts.map((post) => {
                 return <Post userId={userId} post={post} key={post.post_id} />;
             })}
-            {moreToLoad ? <button onClick={() => fetchPostChunk()}>MORE</button> : <p>This is the end...</p>}
+            {userId && <PostModal posts={posts} setPosts={setPosts} />}
+            {moreToLoad ? <button className='load_more' onClick={() => fetchPostChunk()}>MORE</button> : <p>This is the end...</p>}
         </div>
     );
 }

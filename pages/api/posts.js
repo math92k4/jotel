@@ -9,6 +9,16 @@ export default async function handler(req, res) {
     //
     // GET REQUEST - takes ofs as param
     if (req.method === 'GET') {
+        // init non-existing user
+        let userId = 0;
+
+        // Get cookie - apply that user if it exist
+        const cookie = req.cookies.jwt;
+        try {
+            decoded = verify(cookie, process.env.JWT_SECRET);
+            userId = decoded.uid;
+        } catch {}
+
         // Default offset
         let offSet = 0;
 
@@ -16,13 +26,14 @@ export default async function handler(req, res) {
         if (req.query.ofs && IsValidSerial(req.query.ofs)) {
             offSet = req.query.ofs;
         }
+        console.log(offSet);
 
         // Connect do DB and get posts in chunks of 15
         const dbConn = await mysql.createConnection(dbConfig);
 
         try {
-            const query = 'SELECT * FROM `posts` ORDER BY post_iat DESC LIMIT 15 OFFSET ?';
-            const [data] = await dbConn.execute(query, [offSet]);
+            const query = 'CALL SELECT_posts(?,?)';
+            const [[data]] = await dbConn.execute(query, [userId, offSet]);
             return res.status(200).json(data);
         } catch (error) {
             return res.status(500).json({ error: error.message });

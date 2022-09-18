@@ -34,18 +34,17 @@ export default function SignIn() {
 
     // DOM
     return (
-        <main>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Username
-                    <input type="text" name="user_name" id="user_name" />
-                </label>
-                <label>
-                    Password
-                    <input type="password" name="user_password" id="user_password" />
-                </label>
-                <button>Sign in</button>
-            </form>
+        <main className='orange'>
+            <div className='centerize'>
+                <form className='sign_form' onSubmit={handleSubmit}>
+                    <h1>Sign in</h1>
+                    <label htmlFor="user_name">Username</label>
+                    <input required type="text" minLength="2" maxLength="20" name="user_name" id="user_name" />
+                    <label htmlFor="user_password">Password</label>
+                    <input required type="password" minLength="8" maxLength="20" name="user_password" id="user_password" />
+                    <button>Sign in</button>
+                </form>
+            </div>
         </main>
     );
 }

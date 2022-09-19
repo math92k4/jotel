@@ -39,7 +39,6 @@ export function PostModal ({ posts, setPosts }) {
                 <div className='post_modal_bg'>
                     <div className='post_modal'>
                         <form onSubmit={handleSubmit}>
-                            <input hidden name='user_id' type='text'></input>
                             <textarea required name='post_text' rows='4' minLength={1} maxLength={150} placeholder="Write post here"></textarea>
                             <button>Post</button>
                         </form>

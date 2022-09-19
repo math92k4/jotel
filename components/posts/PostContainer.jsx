@@ -29,7 +29,7 @@ export default function PostContainer({ userId, initPosts }) {
             {posts.map((post) => {
                 return <Post userId={userId} post={post} key={post.post_id} />;
             })}
-            {userId && <PostModal posts={posts} setPosts={setPosts} />}
+            {userId ? <PostModal posts={posts} setPosts={setPosts} /> : '' }
             {moreToLoad ? <button className='load_more' onClick={() => fetchPostChunk()}>MORE</button> : <p>This is the end...</p>}
         </div>
     );

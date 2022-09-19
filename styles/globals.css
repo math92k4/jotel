@@ -51,7 +51,6 @@ main, .centerize {
   max-width: 375px;
   margin: auto;
 }
-
 main.orange {
   max-width: none;
   background-color: var(--orange);
@@ -279,6 +278,15 @@ textarea:focus {
   border-radius: 0.4rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
 }
+.sign_form div {
+  display: grid;
+  margin-bottom: 1.5rem;
+}
+.sign_form p {
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+  color: rgb(65, 65, 65);
+}
 .sign_form h1 {
   color: var(--orange);
   font-size: 2rem;
@@ -286,7 +294,6 @@ textarea:focus {
   font-weight: 700;
 }
 .sign_form input {
-  margin-bottom: 1.5rem;
   font-size: 1rem;
   padding: 0.4rem 0.5rem;
   border: 1px solid rgb(182, 182, 182);

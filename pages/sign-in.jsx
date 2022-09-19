@@ -38,10 +38,14 @@ export default function SignIn() {
             <div className='centerize'>
                 <form className='sign_form' onSubmit={handleSubmit}>
                     <h1>Sign in</h1>
-                    <label htmlFor="user_name">Username</label>
-                    <input required type="text" minLength="2" maxLength="20" name="user_name" id="user_name" />
-                    <label htmlFor="user_password">Password</label>
-                    <input required type="password" minLength="8" maxLength="20" name="user_password" id="user_password" />
+                    <div>
+                        <label htmlFor="user_name">Username</label>
+                        <input required type="text" pattern='[A-Za-z]{2,20}' minLength="2" maxLength="20" name="user_name" id="user_name" />
+                    </div>
+                    <div>
+                        <label htmlFor="user_password">Password</label>
+                        <input required type="password" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,20}' minLength="8" maxLength="20" name="user_password" id="user_password" />
+                    </div>
                     <button>Sign in</button>
                 </form>
             </div>

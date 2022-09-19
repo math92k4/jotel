@@ -47,14 +47,11 @@ button {
 button:not(.modal_toggler) {
   font-family: inherit;
 }
-main, .centerize {
+main {
   max-width: 375px;
   margin: auto;
 }
-main.orange {
-  max-width: none;
-  background-color: var(--orange);
-}
+
 
 button {
   border: none;
@@ -88,7 +85,9 @@ a {
 #post_container .post:nth-last-child(5n) {
   background-color: var(--red);
 }
-
+#post_container > div {
+  margin-top: -4.5rem;
+}
 /* POST */
 .post {
   color: white;
@@ -184,7 +183,9 @@ a {
 .modal_toggler {
   cursor: pointer;
   position: sticky;
-  bottom: 1.5rem;
+  /* bottom: 1.5rem; */
+  top: calc(100% - 4.5rem);
+  margin-bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
   font-size: 2.5rem;
@@ -283,9 +284,9 @@ textarea:focus {
   margin-bottom: 1.5rem;
 }
 .sign_form p {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   margin-top: 0.3rem;
-  color: rgb(65, 65, 65);
+  color: rgb(97, 97, 97);
 }
 .sign_form h1 {
   color: var(--orange);
@@ -295,21 +296,22 @@ textarea:focus {
 }
 .sign_form input {
   font-size: 1rem;
-  padding: 0.4rem 0.5rem;
-  border: 1px solid rgb(182, 182, 182);
+  padding: 0.4rem 0rem;
+  border: 0;
+  border-bottom: 1px solid rgb(182, 182, 182);
   border-radius: 0.2rem;
   background: transparent;
   background-color: white;
 }
 .sign_form input:focus {
   outline: 0;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-
+  border-bottom: 1px solid var(--orange);
 }
-.sign_form label {
+/* .sign_form label {
   font-weight: 500;
   margin-bottom: 0.2rem;
-}
+  display: none;
+} */
 .sign_form button {
   margin-top: 1.5rem;
   background-color: var(--orange);
@@ -327,6 +329,29 @@ textarea:focus {
   pointer-events: none;
 }
 
+header {
+  background-color: white;
+  position: sticky;
+  top: 0;
+  width: 375px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+header img {
+  flex: 1;
+  max-width: 3rem;
+  margin: auto;
+}
+
+.end, .loading {
+  padding: 1rem;
+  color: white;
+  background-color: var(--blue);
+  border-radius: 0.35rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

@@ -1,6 +1,7 @@
 import Post from './Post.jsx';
 import { useEffect, useState } from 'react';
 import {PostModal} from "./PostModal"
+import { InView } from "react-intersection-observer"
 
 export default function PostContainer({ userId, initPosts }) {
     const [posts, setPosts] = useState(initPosts);
@@ -26,11 +27,17 @@ export default function PostContainer({ userId, initPosts }) {
     // DOM
     return (
         <div id="post_container">
+            <div>
+            {userId ? <PostModal posts={posts} setPosts={setPosts} /> : '' }
             {posts.map((post) => {
                 return <Post userId={userId} post={post} key={post.post_id} />;
             })}
-            {userId ? <PostModal posts={posts} setPosts={setPosts} /> : '' }
-            {moreToLoad ? <button className='load_more' onClick={() => fetchPostChunk()}>MORE</button> : <p>This is the end...</p>}
+            </div>
+            {moreToLoad ? 
+            <InView as="div" onChange={(inView) => inView ? fetchPostChunk() : ""}>
+                <p className='loading'>Loading...</p>
+            </InView> : 
+            <p className='end'>This is the end...</p>}
         </div>
     );
 }

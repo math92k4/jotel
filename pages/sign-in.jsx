@@ -34,17 +34,17 @@ export default function SignIn() {
 
     // DOM
     return (
-        <main className='orange'>
+        <main>
             <div className='centerize'>
                 <form className='sign_form' onSubmit={handleSubmit}>
                     <h1>Sign in</h1>
                     <div>
-                        <label htmlFor="user_name">Username</label>
-                        <input required type="text" pattern='[A-Za-z]{2,20}' minLength="2" maxLength="20" name="user_name" id="user_name" />
+                        {/* <label htmlFor="user_name">Username</label> */}
+                        <input placeholder='Username' required type="text" pattern='[A-Za-z]{2,20}' minLength="2" maxLength="20" name="user_name" id="user_name" />
                     </div>
                     <div>
-                        <label htmlFor="user_password">Password</label>
-                        <input required type="password" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,20}' minLength="8" maxLength="20" name="user_password" id="user_password" />
+                        {/* <label htmlFor="user_password">Password</label> */}
+                        <input placeholder='Password' required type="password" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,20}' minLength="8" maxLength="20" name="user_password" id="user_password" />
                     </div>
                     <button>Sign in</button>
                 </form>

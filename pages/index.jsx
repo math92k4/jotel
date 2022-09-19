@@ -7,12 +7,15 @@ export default function Index({ initPosts, userId }) {
 
     // DOM
     return (
+        <>
         <main>
+            <header><img src="svgs/jotel.svg" alt="Jotel logo" /></header>
             <section className='post_section'>
                 {!userId && <h1>Sign up</h1>}
                 <PostContainer userId={userId} initPosts={initPosts} />
             </section>
         </main>
+        </>
     );
 }
 

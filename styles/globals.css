@@ -85,7 +85,7 @@ a {
 #post_container .post:nth-last-child(5n) {
   background-color: var(--red);
 }
-#post_container > div {
+#post_container > div.minus_spacing {
   margin-top: -4.5rem;
 }
 /* POST */

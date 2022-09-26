@@ -1,7 +1,6 @@
 import { memo, useState } from 'react';
 import { epochToTime } from '../../g';
 import Router from 'next/router';
-import { useRouter } from 'next/router';
 
 const Post = memo(({ post, userId }) => {
     const [likes, setLikes] = useState(post.post_likes);
@@ -57,5 +56,5 @@ const Post = memo(({ post, userId }) => {
         </article>
     );
 });
-
+Post.displayName = 'Post';
 export default Post;

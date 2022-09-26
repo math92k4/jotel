@@ -27,7 +27,7 @@ export default function PostContainer({ userId, initPosts }) {
     // DOM
     return (
         <div id="post_container">
-            <div>
+            <div className={userId ? "minus_spacing" : ""}>
             {userId ? <PostModal posts={posts} setPosts={setPosts} /> : '' }
             {posts.map((post) => {
                 return <Post userId={userId} post={post} key={post.post_id} />;

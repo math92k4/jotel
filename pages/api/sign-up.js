@@ -1,6 +1,8 @@
 import mysql from 'mysql2/promise';
 import { hash } from 'bcrypt';
-import { IsValidName, IsValidPassword, dbConfig } from '../../g';
+import { sign } from 'jsonwebtoken';
+import cookie from 'cookie';
+import { IsValidName, IsValidPassword, dbConfig, CookieOptions } from '../../g';
 
 export default async function handler(req, res) {
     // Validate method
@@ -27,12 +29,20 @@ export default async function handler(req, res) {
     try {
         const query = `CALL INSERT_user(?, ?)`;
         const values = [userName, hashed];
-        const [data] = await dbConn.execute(query, values);
+        const [[[data]]] = await dbConn.execute(query, values);
 
-        // CREATE JWT
+        const jwtUser = {
+            uid: data.fk_user_id,
+            sid: data.session_id,
+        };
+        const jwt = sign(jwtUser, process.env.JWT_SECRET);
+        console.log(jwt);
 
-        // Succes
-        return res.status(200).json({ info: 'User created' });
+        // Set cookie
+        res.setHeader('Set-Cookie', cookie.serialize('jwt', jwt, CookieOptions));
+
+        // SUCCES
+        return res.status(200).json({ info: 'Successfully created' });
 
         // Error
     } catch (error) {

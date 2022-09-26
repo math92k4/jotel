@@ -338,6 +338,12 @@ header {
   justify-content: space-between;
   padding: 0.5rem;
 }
+header a {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+  cursor: pointer;
+}
 header img {
   flex: 1;
   max-width: 3rem;

@@ -39,7 +39,6 @@ export default async function handler(req, res) {
             const query = `INSERT INTO post_likes (fk_post_id, fk_user_id, is_like)
                         VALUES(?,?,?)`;
             const [dbRes] = await dbConn.execute(query, [postId, userId, isLike]);
-            console.log(dbRes);
 
             if (dbRes.affectedRows == 0) return res.status(204);
 

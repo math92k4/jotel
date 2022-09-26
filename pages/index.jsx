@@ -2,6 +2,7 @@ import PostContainer from '../components/posts/PostContainer.jsx';
 import { verify } from 'jsonwebtoken';
 import mysql from 'mysql2/promise';
 import { dbConfig } from '../g';
+import Router from 'next/router.js';
 
 export default function Index({ initPosts, userId }) {
 
@@ -9,9 +10,12 @@ export default function Index({ initPosts, userId }) {
     return (
         <>
         <main>
-            <header><img src="svgs/jotel.svg" alt="Jotel logo" /></header>
+            <header>
+                {!userId && <a onClick={() => Router.push("sign-up")} >Sign up</a>}
+                <img src="svgs/jotel.svg" alt="Jotel logo" />
+                {!userId && <a onClick={() => Router.push("sign-in")} >Sign in</a>}
+            </header>
             <section className='post_section'>
-                {!userId && <h1>Sign up</h1>}
                 <PostContainer userId={userId} initPosts={initPosts} />
             </section>
         </main>
@@ -33,7 +37,7 @@ export async function getServerSideProps(context) {
     try {
         const query = 'CALL SELECT_posts(?,?)';
         const [[initPosts]] = await dbConn.execute(query, [userId, 0]);
-        console.log(initPosts)
+
         return {
             props: {
                 initPosts,

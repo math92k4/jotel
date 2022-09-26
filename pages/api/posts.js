@@ -26,7 +26,6 @@ export default async function handler(req, res) {
         if (req.query.ofs && IsValidSerial(req.query.ofs)) {
             offSet = req.query.ofs;
         }
-        console.log(offSet);
 
         // Connect do DB and get posts in chunks of 15
         const dbConn = await mysql.createConnection(dbConfig);

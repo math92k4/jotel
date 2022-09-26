@@ -25,6 +25,7 @@ export default function SignUp() {
             console.log('error happened');
             return;
         }
+        const res = await conn.json();
 
         // Succes
         Router.push('/');

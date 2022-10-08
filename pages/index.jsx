@@ -1,4 +1,4 @@
-import PostContainer from '../components/posts/PostContainer.jsx';
+import PostContainer from '../components/posts/PostContainer';
 import { verify } from 'jsonwebtoken';
 import mysql from 'mysql2/promise';
 import { dbConfig } from '../g';
